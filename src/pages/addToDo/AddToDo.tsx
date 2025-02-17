@@ -2,7 +2,7 @@ import type React from "react"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Todo } from "../../interfaces/Todo"
-import axios from "axios"
+import api from "../../services/axiosConfig"
 import toast from "react-hot-toast"
 
 const AddTodo = () => {
@@ -23,7 +23,7 @@ const AddTodo = () => {
         }
 
         try {
-            await axios.post("http://localhost:3000/todos", todo, {
+            api.post("/todos", todo, {
                 headers: { Authorization: `Bearer ${token}` },
             })
             toast.success("Tarefa adicionada com sucesso!")

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import axios from "axios"
+import api from "../../services/axiosConfig"
 import { useNavigate, Link } from "react-router-dom"
 import { format } from "date-fns"
 import { ptBR } from "date-fns/locale"
@@ -24,7 +24,7 @@ const Home = () => {
         }
 
         try {
-            const response = await axios.get("http://localhost:3000/todos", {
+            const response = await api.get("/todos", {
                 headers: { Authorization: `Bearer ${token}` },
             })
             setTodos(response.data)

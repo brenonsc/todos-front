@@ -2,7 +2,7 @@ import type React from "react"
 
 import { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
-import axios from "axios"
+import api from "../../services/axiosConfig"
 import toast from "react-hot-toast"
 import { Todo } from "../../interfaces/Todo"
 
@@ -21,8 +21,8 @@ const EditTodo = () => {
             }
 
             try {
-                const response = await axios.get(`http://localhost:3000/todos/${id}`, {
-                    headers: { Authorization: `Bearer ${token}` },
+                const response = await api.get(`/todos/${id}`, {
+                    headers: {Authorization: `Bearer ${token}`},
                 })
                 setTodo(response.data)
             } catch (error) {
@@ -40,7 +40,7 @@ const EditTodo = () => {
         if (!token || !todo) return
 
         try {
-            await axios.put(`http://localhost:3000/todos/${id}`, todo, {
+            await api.put(`/todos/${id}`, todo, {
                 headers: { Authorization: `Bearer ${token}` },
             })
             toast.success("Tarefa atualizada com sucesso!")
@@ -56,7 +56,7 @@ const EditTodo = () => {
 
         if (window.confirm("Tem certeza que deseja excluir esta tarefa?")) {
             try {
-                await axios.delete(`http://localhost:3000/todos/${id}`, {
+                await api.delete(`/todos/${id}`, {
                     headers: { Authorization: `Bearer ${token}` },
                 })
                 toast.success("Tarefa excluída com sucesso!")

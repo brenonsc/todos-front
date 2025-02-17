@@ -2,7 +2,7 @@ import type React from "react"
 
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import axios from "axios"
+import api from "../../services/axiosConfig"
 import toast from "react-hot-toast"
 import { ArrowLeft, EyeIcon, EyeOffIcon } from "lucide-react"
 import { User } from "../../interfaces/User"
@@ -27,7 +27,7 @@ const UserProfile = () => {
             }
 
             try {
-                const response = await axios.get("http://localhost:3000/users/me", {
+                const response = await api.get("/users/me", {
                     headers: { Authorization: `Bearer ${token}` },
                 })
                 setUser(response.data)
@@ -48,8 +48,8 @@ const UserProfile = () => {
         if (!token || !user) return
 
         try {
-            await axios.put(
-                `http://localhost:3000/users/${user.id}`,
+            await api.put(
+                `/users/${user.id}`,
                 { name, email },
                 {
                     headers: { Authorization: `Bearer ${token}` },
@@ -73,8 +73,8 @@ const UserProfile = () => {
         }
 
         try {
-            await axios.put(
-                `http://localhost:3000/users/${user.id}`,
+            await api.put(
+                `/users/${user.id}`,
                 { name, email, password:newPassword },
                 {
                     headers: { Authorization: `Bearer ${token}` },
@@ -99,7 +99,7 @@ const UserProfile = () => {
             )
         ) {
             try {
-                await axios.delete(`http://localhost:3000/users/${user.id}`, {
+                await api.delete(`/users/${user.id}`, {
                     headers: { Authorization: `Bearer ${token}` },
                 })
                 localStorage.removeItem("token")

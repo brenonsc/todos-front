@@ -1,7 +1,8 @@
 import type React from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "axios"
+import api from "../../services/axiosConfig"
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import toast from "react-hot-toast";
 
@@ -15,7 +16,7 @@ const LoginPage = () => {
         e.preventDefault();
         try {
             const response = await toast.promise(
-                axios.post("http://localhost:3000/login", { email, password }),
+                api.post("/login", { email, password }),
                 {
                     loading: "Autenticando...",
                     success: <b>Usuário autenticado!</b>,
