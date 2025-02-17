@@ -1,14 +1,9 @@
 import type React from "react"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { Todo } from "../../interfaces/Todo"
 import axios from "axios"
 import toast from "react-hot-toast"
-
-interface Todo {
-    title: string
-    description: string
-    status: "pending" | "in_progress" | "completed"
-}
 
 const AddTodo = () => {
     const [todo, setTodo] = useState<Todo>({

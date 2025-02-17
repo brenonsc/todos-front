@@ -4,15 +4,8 @@ import { useNavigate, Link } from "react-router-dom"
 import { format } from "date-fns"
 import { ptBR } from "date-fns/locale"
 import toast from "react-hot-toast"
-import { PlusIcon, LogOutIcon } from "lucide-react"
-
-interface Todo {
-    id: string
-    title: string
-    description: string
-    status: "pending" | "in_progress" | "completed"
-    createdAt: string
-}
+import { PlusIcon, LogOutIcon, UserIcon } from "lucide-react"
+import { Todo } from "../../interfaces/Todo"
 
 const Home = () => {
     const [todos, setTodos] = useState<Todo[]>([])
@@ -70,17 +63,11 @@ const Home = () => {
         }
     }
 
-    const handleLogout = async () => {
-        try {
-            const token = localStorage.getItem("token")
-            await axios.post("http://localhost:3000/logout", {}, {
-                headers: { Authorization: `Bearer ${token}` }
-            })
+    const handleLogout = () => {
+        if(window.confirm("Tem certeza que deseja sair?")) {
             localStorage.removeItem("token")
             navigate("/")
             toast.success("Logout realizado com sucesso!")
-        } catch (error) {
-            toast.error("Erro ao realizar logout: " + error.message)
         }
     }
 
@@ -89,6 +76,13 @@ const Home = () => {
             <div className="container mx-auto px-4 py-8">
                 <div className="flex justify-between items-center mb-8">
                     <h1 className="text-3xl font-bold text-gray-800 dark:text-white">Minhas Tarefas</h1>
+                    <Link
+                        to="/profile"
+                        className="flex items-center px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors mr-2"
+                    >
+                        <UserIcon className="mr-2" size={18} />
+                        Perfil
+                    </Link>
                     <button
                         onClick={handleLogout}
                         className="flex items-center px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors"

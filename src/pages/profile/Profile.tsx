@@ -5,12 +5,7 @@ import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import toast from "react-hot-toast"
 import { ArrowLeft, EyeIcon, EyeOffIcon } from "lucide-react"
-
-interface User {
-    id: string
-    name: string
-    email: string
-}
+import { User } from "../../interfaces/User"
 
 const UserProfile = () => {
     const [user, setUser] = useState<User | null>(null)

@@ -4,13 +4,7 @@ import { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import axios from "axios"
 import toast from "react-hot-toast"
-
-interface Todo {
-    id: string
-    title: string
-    description: string
-    status: "pending" | "in_progress" | "completed"
-}
+import { Todo } from "../../interfaces/Todo"
 
 const EditTodo = () => {
     const [todo, setTodo] = useState<Todo | null>(null)
