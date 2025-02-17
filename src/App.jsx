@@ -6,6 +6,7 @@ import Home from './pages/home/Home';
 import SignUp from "./pages/signup/SignUp.js";
 import AddTodo from "./pages/addToDo/AddTodo";
 import EditTodo from "./pages/editTodo/EditTodo";
+import UserProfile from "./pages/profile/Profile";
 import { Toaster } from "react-hot-toast";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/edit/:id" element={<EditTodo />} />
                     <Route path="/add" element={<AddTodo />} />
+                    <Route path="/profile" element={<UserProfile />} />
                 </Routes>
             </Router>
         </>
